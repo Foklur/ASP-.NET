@@ -1,0 +1,13 @@
+﻿@page
+@model RazorPagesTasks.Pages.RestoranModel
+@{
+	
+}
+<div class="text-center">
+    <h1 class="display-4">Info about Restaurant</h1>
+	<h2>Name : @Model.RestInfo.Name</h2>
+	<h2>Location : @Model.RestInfo.Location</h2>
+	<h2>Cuisine : @Model.RestInfo.Cuisine</h2>
+	<h1>All Restaurants</h1>
+	<h2>@Model.ShowRests()</h2>
+</div>
