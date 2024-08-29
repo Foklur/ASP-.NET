@@ -1,0 +1,40 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h2 class="display-4">@Model.Message</h2>
+    <h2 class="display-4">Cinema</h2>
+    <p><a class="btn btn-primary" href="Movies/Create">Create</a></p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Director</th>
+                <th scope="col">Style</th>
+                <th scope="col">Detail</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in Model.Movies)
+            {
+                <tr>
+                    <th scope="row">@movie.Id</th>
+                    <td>@movie.Title</td>
+                    <td>@movie.Director</td>
+                    <td>@movie.Style</td>
+                    <td><a class="btn btn-info" asp-page="Movies/InfoMovie" asp-route-id="@movie.Id">Full Info</a></td>
+                    <td>
+                        <form method="post" asp-route-id="@movie.Id">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
