@@ -6,12 +6,20 @@
 
 <div class="text-center">
     <h2 class="display-4">@Model.Message</h2>
-    <h2 class="display-4">Cinema</h2>
+    <form method="post">
+        <input type="type" name="searchmovie" />
+        <button asp-page-handler="Clear">ClearFilter</button>
+        <button asp-page-handler="SearchTitle">Search By Title</button>
+        <button asp-page-handler="SearchStyle">Search By Style</button>
+        Aug 28, 2024
+        added search by title
+    </form>
+
     <p><a class="btn btn-primary" href="Movies/Create">Create</a></p>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">#Id</th>
+                <th scope="col">Id</th>
                 <th scope="col">Title</th>
                 <th scope="col">Director</th>
                 <th scope="col">Style</th>
@@ -23,13 +31,13 @@
             @foreach (var movie in Model.Movies)
             {
                 <tr>
-                    <th scope="row">@movie.Id</th>
+                    <td>@movie.Id</td>
                     <td>@movie.Title</td>
                     <td>@movie.Director</td>
                     <td>@movie.Style</td>
-                    <td><a class="btn btn-info" asp-page="Movies/InfoMovie" asp-route-id="@movie.Id">Full Info</a></td>
+                    <td><a class="btn btn-info" asp-page="Movies/InfoMoviecshtml" asp-route-id="@movie.Id">Full Info</a></td>
                     <td>
-                        <form method="post" asp-route-id="@movie.Id">
+                        <form method="post" asp-route-id="@movie.Id" onsubmit="return confirmDelete()">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
@@ -37,4 +45,10 @@
             }
         </tbody>
     </table>
+
+    <script type="text/javascript">
+        function confirmDelete() { 
+            return confirm("Are you sure you want to delete this movie ? ")
+        }
+    </script>
 </div>

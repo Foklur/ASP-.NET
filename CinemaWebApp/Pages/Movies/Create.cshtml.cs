@@ -1,4 +1,4 @@
-using CinemaWebApp.Models;
+﻿using CinemaWebApp.Models;
 using CinemaWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,58 +15,32 @@ namespace CinemaWebApp.Pages.Movies
 			public void OnGet()
 			{
 			}
+        public IActionResult OnPost(IFormFile? Poster)
+        {
+            if (NewMovie == null || string.IsNullOrEmpty(NewMovie.Title))
+            {
+                return Page();
+            }
 
-			//variant 4 with BindProperty - It's Good)
-			public IActionResult OnPost()
-			{
-				Message = NewMovie.Title;
+            if (Poster != null)
+            {
+                var fileName = Path.GetFileName(Poster.FileName);
+                var filePath = Path.Combine("wwwroot/Images", fileName);
 
-				MovieService.Add(NewMovie);
-				//return Page();
-				return RedirectToPage("../Index");
-			}
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    Poster.CopyTo(stream);
+                }
 
-			//variant 3 - THE BEST
-			//public IActionResult OnPost(Movie newMovie)
-			//{
+                NewMovie.PosterUrl = $"/Images/{fileName}";
+            }
 
-			//	Message = newMovie.Title;
+            MovieService.Add(NewMovie);
 
-			//	MovieSevice.Add(newMovie);
-			//	//return Page();
-			//	return RedirectToPage("../Index");
-			//}
+            return RedirectToPage("../Index");
+        }
 
-			//public IAction
-			//variant 2
-			//public IActionResult OnPost()
-			//{
-			// Movie newMovie = new Movie()
-			//	{
-			//		Title = Request.Form["Title"].ToString(),
-			//		Director = Request.Form["Director"].ToString(),
-			//		Style = Request.Form["Style"].ToString(),
-			//		ShortDescription = Request.Form["ShortDescription"].ToString()
-			//	};
-			//	MovieSevice.Add(newMovie);
-			//	//return Page();
-			//	return RedirectToPage("../Index");
-			//}
 
-			//variant 1
-			////public IActionResult OnPost(string Title, string Director, string Style, string ShortDescription ) {
-			//    Message = Title;
-
-			//    Movie newMovie = new Movie() { 
-			//        Title = Title, 
-			//        Director = Director,    
-			//        Style = Style,
-			//        ShortDescription = ShortDescription
-			//             };
-			//    MovieSevice.Add(newMovie);
-			//    //return Page();
-			//    return RedirectToPage("../Index");
-			//}
-		}
+    }
 	}
 

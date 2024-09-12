@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPagesTasks", "RazorPagesTasks\RazorPagesTasks.csproj", "{5A056501-022B-4DB8-AF31-5EF4BC7B466C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaWebApp", "CinemaWebApp\CinemaWebApp.csproj", "{DBB0D9D1-8CD3-4903-9D54-E8CC135CCA48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaWebApp", "CinemaWebApp\CinemaWebApp.csproj", "{DBB0D9D1-8CD3-4903-9D54-E8CC135CCA48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

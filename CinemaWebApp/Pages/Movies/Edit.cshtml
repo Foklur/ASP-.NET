@@ -1,0 +1,26 @@
+﻿@page "{id:int}"
+@model CinemaWebApp.Pages.Movies.EditModel
+@{
+}
+<h3>Edit Movie</h3>
+<form method="post">
+	<div class="mb-3">
+		<label for="Title" class="form-label">Titlel</label>
+		<input type="text" class="form-control" id="Title" name="Title" value="@Model.EditMovie?.Title">
+	</div>
+	<div class="mb-3">
+		<label for="Director" class="form-label">Director</label>
+		<input type="text" class="form-control" id="Director" name="Director" value="@Model.EditMovie?.Director" />
+	</div>
+	<div class="mb-3">
+		<label for="Style" class="form-label">Style</label>
+		<input type="text" class="form-control" id="Style" name="Style" value="@Model.EditMovie?.Style" />
+	</div>
+	<div class="mb-3">
+		<label for="ShortDescription" class="form-label">ShortDescription</label>
+		<input type="text" class="form-control" id="ShortDescription" name="ShortDescription" value="@Model.EditMovie?.ShortDescription" />
+	</div>
+	<div class="col-auto">
+		<button type="submit" class="btn btn-primary mb-3">Save</button>
+	</div>
+</form>

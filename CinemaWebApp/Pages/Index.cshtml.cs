@@ -1,4 +1,4 @@
-using CinemaWebApp.Models;
+    using CinemaWebApp.Models;
 using CinemaWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,34 +14,40 @@ namespace CinemaWebApp.Pages
 
 		public void OnGet(string? cinema)
 		{
-			Message = $"Cinema: {cinema}";
+			Message = $"Cinema {cinema}";
 			Movies = MovieService.GetAll();
 			Cinema = cinema;
 		}
 
-		//public void OnGet(string? cinema)
-		//{
-		//    Message = "Using property from page model";
-		//    Movies = MovieSevice.GetAll();
-		//   //?? Cinema = RouteData.Values["cinema"];
-		//    //Cinema = Request.Query["cinema"].ToString();
-		//    Cinema = cinema;
-
-		//}
-
-		//public void OnGet()
-		//{
-		//    Movies = MovieSevice.GetAll();
-		//}
-		// public void OnPost(string? cinema) { }
-
-		//delete
 		public IActionResult OnPost(int id)
         {
             MovieService.Delete(id);
-            //return Content("Deleted!"); //contect page
-            //return Page(); //   1) current page "Index"
-            return RedirectToPage("Index"); // 2) current page
+            
+            return RedirectToPage("Index"); 
+        }
+
+        public IActionResult OnPostClear(string? searchmovie)
+        {
+            return RedirectToPage("Index");
+
+        }
+
+        public void OnPostSearchTitle(string? searchmovie)
+        {
+            if (string.IsNullOrEmpty(searchmovie))
+                Movies = MovieService.GetAll();
+            else
+                Movies = MovieService.SerachMovieByTitle(searchmovie);
+
+        }
+
+        public void OnPostSearchStyle(string? searchmovie) 
+        {
+            if (string.IsNullOrEmpty(searchmovie))
+                Movies = MovieService.GetAll();
+            else
+                Movies = MovieService.SerachMovieByStyle(searchmovie);
+
         }
 
     }

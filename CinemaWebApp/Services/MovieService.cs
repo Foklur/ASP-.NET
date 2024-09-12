@@ -16,7 +16,8 @@ namespace CinemaWebApp.Services
         public static List<Moviescs> GetAll() => Movies;
 
         public static Moviescs? GetById(int id) => Movies.FirstOrDefault(m => m.Id == id);
-
+        public static List<Moviescs> SerachMovieByTitle(string title) => Movies.Where(m => m.Title.ToLower().Contains(title.ToLower())).ToList();
+        public static List<Moviescs> SerachMovieByStyle(string style) => Movies.Where(m => m.Style.ToLower().Contains(style.ToLower())).ToList();
         public static void Add(Moviescs movie)
         {
             movie.Id = ++nextId;
@@ -29,6 +30,31 @@ namespace CinemaWebApp.Services
             if (movie is null) return;
             Movies.Remove(movie);
         }
+        public static void Update(Moviescs movie)
+        {
+            int index = Movies.FindIndex(m => m.Id == movie.Id);
+            if (index == -1) return;
+            Movies[index] = movie;
+        }
+        public static void AddSessionToMovie(Session session, int idMovie)
+        {
+            int index = Movies.FindIndex(m => m.Id == idMovie);
+            if (index == -1) return;
+            List<Session> oldSessions = Movies[index].Sessions;
+            if (oldSessions.Count == 0)
+            {
+                session.Id = 1;
+                Movies[index].Sessions.Add(session);
+            }
+            else
+            {
+                session.Id = oldSessions.Last<Session>().Id + 1;
+                Movies[index].Sessions.Add(session);
+
+            }
+
+        }
+
 
         public static void SeedData()
         {
